@@ -20,9 +20,9 @@ font-family: 'Heebo', sans-serif;
 font-size: 16px;
 font-weight: 400;
 background-color: #111111;
-}
-body.lock{
-overflow: hidden;
+	@media (max-width: 425px) {
+		overflow: hidden;
+	}
 }
 .wrapper{
 overflow: hidden;
@@ -152,6 +152,7 @@ flex: 1 1 auto;
 		@media (max-width: 734px){
 			font-size: 24px;
 			padding: 10px 15px;
+			height: max-content;
 			width: max-content;
 		}
 	}
@@ -189,7 +190,6 @@ flex: 1 1 auto;
 		}
 	}
 }
-
 
 
 .footer {
