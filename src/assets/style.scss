@@ -101,6 +101,9 @@ flex: 1 1 auto;
 	height: 100svh;
 	background: url('/bg.jpg');
 	@media (max-height: 740px){
+		padding-top: 80px;
+	}
+	@media (max-height: 460px){
 		padding-top: 60px;
 	}
 	&__container {
