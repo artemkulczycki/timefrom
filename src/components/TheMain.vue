@@ -10,7 +10,8 @@
 						<input type="time" v-model="time" @keydown.enter="count">
 					</div>
 					<button class="content__btn" @click="count">Получить информацию</button>
-					<div v-show="res" class="content__result">С {{ date }} {{ time }} прошло <strong>{{ res }}</strong> // По московскому времени</div>
+					<div v-show="res" class="content__result">С {{ date }} {{ time }} прошло {{ res }} // По московскому времени</div>
+					<button v-show="res" @click="clear" class="content__clear">Очистить</button>
 				</div>
 			</div>
 		</div>
@@ -31,6 +32,13 @@ export default {
 		};
 	},
 	methods: {
+		clear(){
+			this.time = `12:12`
+			this.days = null
+			this.hours = null
+			this.minutes = null
+			this.res = null
+		},
 		getCurrentMoscowTime() {
 			const now = new Date();
 			const offset = now.getTimezoneOffset();
@@ -41,7 +49,7 @@ export default {
 			return `${hours}:${minutes}`;
 		},
 		count(){
-			const selected = new Date(`${this.date}T${this.time}:00+03:00`); // указываем временную зону Москвы (+03:00)
+			const selected = new Date(`${this.date}T${this.time}:00+03:00`); // временная зона Москвы
 			const result = new Date().getTime() - selected.getTime();
 			this.days = Math.floor(result / (1000 * 60 * 60 * 24));
 			this.hours = Math.floor((result % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -52,8 +60,6 @@ export default {
 				{ unit: 'час', endings: ['часов', 'час', 'часа'] },
 				{ unit: 'минута', endings: ['минут', 'минута', 'минуты'] },
 			];
-
-			// Функция для определения окончания в зависимости от числа
 			function getEnding(number, endings) {
 				const remainder = Math.abs(number) % 100;
 				if (remainder >= 11 && remainder <= 19) {

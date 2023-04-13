@@ -99,7 +99,7 @@ flex: 1 1 auto;
 .page {
 	padding-top: 120px;
 	height: 100svh;
-	background: url('/bg.jpg');
+	background: url('/bg.jpg') center no-repeat;
 	@media (max-height: 740px){
 		padding-top: 80px;
 	}
@@ -188,6 +188,14 @@ flex: 1 1 auto;
 		@media (max-width: 734px){
 			margin-top: 20px;
 		}
+	}
+	&__clear {
+		margin: 20px auto 10px auto;
+		display: block;
+		padding: 15px 40px;
+		border-radius: 10px;
+		background: linear-gradient(98.3deg, rgb(0, 0, 0) 10.6%, rgb(255, 0, 0) 97.7%);
+		color: white;
 	}
 }
 
