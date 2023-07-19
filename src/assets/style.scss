@@ -202,7 +202,7 @@ flex: 1 1 auto;
 
 .footer {
 	position: absolute;
-	background-color: #0e0e0e7a; 
+	background: #1f1e1ea8;
 	bottom: 0;
 	z-index: 100;
 	height: 110px;
@@ -235,4 +235,20 @@ flex: 1 1 auto;
 			opacity: 1;
 		}
 	}
+}
+
+.remove-outline {
+	&:focus {
+		box-shadow: none !important;
+	 }
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }

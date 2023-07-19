@@ -9,9 +9,17 @@
 						<input type="date" v-model="date" @keydown.enter="count">
 						<input type="time" v-model="time" @keydown.enter="count">
 					</div>
-					<button class="content__btn" @click="count">Получить информацию</button>
-					<div v-show="res" class="content__result">С {{ date }} {{ time }} прошло {{ res }} // По московскому времени</div>
-					<button v-show="res" @click="clear" class="content__clear">Очистить</button>
+					<div class="card flex justify-content-center" style="text-align: center;">
+						<Button label="Получить информацию" @click="count" class="p-button-lg remove-outline"/>
+					</div>
+					<transition>
+						<div v-if="res">
+							<div class="content__result">С {{ date }} {{ time }} прошло {{ res }} // По московскому времени</div>
+							<div class="card flex justify-content-center" style="text-align: center; margin: 20px auto 10px;">
+								<Button label="Очистить" @click="clear" severity="danger" class="remove-outline"/>
+							</div>
+						</div>
+					</transition>
 				</div>
 			</div>
 		</div>
@@ -19,7 +27,11 @@
 </template>
 
 <script>
+import Button from "primevue/button"
 export default {
+	components: {
+		Button
+	},
 	data() {
     const currentDate = new Date();
 		return {
@@ -33,8 +45,6 @@ export default {
 	},
 	methods: {
 		clear(){
-			this.time = `12:12`
-			this.days = null
 			this.hours = null
 			this.minutes = null
 			this.res = null
@@ -49,8 +59,14 @@ export default {
 			return `${hours}:${minutes}`;
 		},
 		count(){
-			const selected = new Date(`${this.date}T${this.time}:00+03:00`); // временная зона Москвы
+			const selected = new Date(`${this.date}T${this.time}:00+03:00`);
 			const result = new Date().getTime() - selected.getTime();
+
+			if (result < 1) {
+				alert("Некорректная дата")
+				return null
+			}
+
 			this.days = Math.floor(result / (1000 * 60 * 60 * 24));
 			this.hours = Math.floor((result % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 			this.minutes = Math.floor((result % (1000 * 60 * 60)) / (1000 * 60));
