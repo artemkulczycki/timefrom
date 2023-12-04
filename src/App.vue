@@ -1,3 +1,12 @@
+<template>
+	<div class="wrapper">
+		<Header />
+		<Main />
+		<Footer />
+	</div>
+	<Toast />
+</template>
+
 <script>
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
@@ -8,12 +17,3 @@ export default {
 	},
 }
 </script>
-
-<template>
-	<div class="wrapper">
-		<Header />
-		<Main />
-		<Footer />
-	</div>
-</template>
-

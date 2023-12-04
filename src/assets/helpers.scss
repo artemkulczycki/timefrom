@@ -8,6 +8,22 @@
   }
 }
 
+.p-toast {
+  @media (max-width: 768px) {
+    width: 300px !important;
+  }
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 100vw;
+  height: 100dvh;
+  background-color: #07070788;
+}
+
 .v-enter-active,
 .v-leave-active {
   transition: opacity 0.5s ease;

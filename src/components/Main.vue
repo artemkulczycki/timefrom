@@ -1,21 +1,20 @@
 <template>
 	<main class="main">
 		<div class="overlay"></div>
-		<Toast />
 		<div class="page">
 			<div class="page__container">
-				<div class="page__content content">
+				<div class="content">
 					<h1 class="content__title">Узнать сколько времени прошло с даты</h1>
 					<div class="content__inputs">
 						<input type="date" v-model="date" @keydown.enter="count">
 						<input type="time" v-model="time" @keydown.enter="count">
 					</div>
 					<div class="center">
-						<Button label="Получить информацию" @click="count" class="p-button-lg remove-outline" />
+						<Button label="Получить информацию" @click="count" size="large" class="remove-outline" />
 					</div>
 					<transition>
 						<div v-if="res" class="result">
-							<div class="result__text">С {{ date }} {{ time }} прошло {{ res }} // По московскому времени</div>
+							<div class="result__text">С {{ since }} прошло {{ res }} // По московскому времени</div>
 							<div class="center">
 								<Button label="Очистить" @click="clear" severity="danger" class="remove-outline center" />
 							</div>
@@ -38,6 +37,7 @@ export default {
 			days: null,
 			hours: null,
 			minutes: null,
+			since: null,
 			res: null,
 		}
 	},
@@ -60,10 +60,12 @@ export default {
 			const selected = new Date(`${this.date}T${this.time}:00+03:00`)
 			const result = new Date().getTime() - selected.getTime()
 
-			if (result < 1) {
+			if (result < 60000) {
 				this.$toast.add({ severity: 'error', summary: 'Ошибка', detail: 'Некорректная дата', life: 3000 });
 				return null
 			}
+
+			this.since = this.date + ' ' + this.time
 
 			this.days = Math.floor(result / (1000 * 60 * 60 * 24))
 			this.hours = Math.floor((result % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
